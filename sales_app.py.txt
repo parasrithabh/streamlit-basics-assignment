@@ -1,0 +1,20 @@
+import streamlit as st
+import pandas as pd
+
+st.title("Sales Dashboard")
+
+data = {
+    "Product": ["Laptop", "Phone", "Tablet", "Headphones", "Watch"],
+    "Category": ["Electronics", "Electronics", "Electronics", "Accessories", "Accessories"],
+    "Sales": [80000, 50000, 30000, 5000, 15000]
+}
+
+df = pd.DataFrame(data)
+
+category = st.sidebar.selectbox("Select Category", df["Category"].unique())
+
+filtered_df = df[df["Category"] == category]
+
+st.dataframe(filtered_df)
+
+st.line_chart(filtered_df["Sales"])
